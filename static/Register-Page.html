@@ -2,41 +2,56 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>register page</title>
+    <link rel="stylesheet" href="Register-Page.css" />
+    <title>Register Page</title>
   </head>
   <body>
-    <h1 style="text-align: center">register</h1>
-
-    <fieldset>
-      <legend>register</legend>
-
-      <form action="login_page.html">
+    <nav>
+      <div>
+        <a href="/">Online Library</a>
+      </div>
+      <div class="navlinks">
+        <a href="./Books.html">Books</a>
+        <a href="./Login-Page.html">Login</a>
+      </div>
+    </nav>
+    <div class="container">
+      <form action="Register-Page.html">
+        <h1>Register</h1>
         <div>
           <label for="name"> Name </label>
           <input
             id="name"
             type="text"
-            placeholder="write your full name"
+            placeholder="Enter your full name"
             required
           />
         </div>
         <div>
-          <label for="email"> email</label>
-          <input id="email" type="email" placeholder="@gmail.com" required />
+          <label for="email"> Email</label>
+          <input
+            id="email"
+            type="email"
+            placeholder="Enter your email"
+            required
+          />
         </div>
         <div>
-          <label for="password">password</label>
-          <input id="password" type="password" placeholder="" required />
+          <label for="password">Password</label>
+          <input
+            id="password"
+            type="password"
+            placeholder="Enter your password"
+            required
+          />
         </div>
-        <div>
+        <div class="admin-checkbox">
           <input id="user" type="checkbox" value="user" name="type of user" />
-          <label for="user">Is Admin?</label>
+          <label for="user">Admin</label>
         </div>
-        <input type="submit" value="register " />
+        <input type="submit" value="Register" class="submitbtn" />
+        <p>Already have an account? <a href="Login-Page.html">Login</a></p>
       </form>
-      <p>Do you have an account <a href="login_page.html">login</a></p>
-    </fieldset>
-
-    <!--<p>switsh page to <a href="page1.html">page 1</a>.</p>  -->
+    </div>
   </body>
 </html>

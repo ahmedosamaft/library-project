@@ -1,45 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Borrowed Books</title>
-</head>
-<body>
-  <nav>
-      <a href="/">Online Library</a>
-
-      <ul>
-        <li><a href="/books.html">Books</a></li>
-        <li><a href="/login.html">Login</a></li>
-        <li><a href="/register.html">Register</a></li>
-      </ul>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="Borrowed-Books-List.css" />
+    <title>Borrowed Books</title>
+  </head>
+  <body>
+    <nav>
+      <div>
+        <a href="/">Online Library</a>
+      </div>
+      <div class="navlinks">
+        <a href="./Books.html">Books</a>
+        <a href="./Login-Page.html">Login</a>
+        <a href="./Register-Page.html">Register</a>
+      </div>
     </nav>
-    <h1>List of Borrowed Books</h1>
-    <table border="1" cellpadding="5" cellspacing="0">
+
+    <div class="container">
+      <div class="table-header">
+        <h1>List of Books</h1>
+      </div>
+      <table border="1" cellpadding="5" cellspacing="0">
         <thead>
-            <tr>
-                <th>Book Title</th>
-                <th>Author</th>
-                <th>Borrowed Date</th>
-                <th>Return Date</th>
-            </tr>
+          <tr>
+            <th>Book Title</th>
+            <th>Author</th>
+            <th>Borrowed Date</th>
+            <th>Return Date</th>
+          </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Harry Potter and the Prisoner of Azkaban</td>
-                <td>J.K. Rowling</td>
-                <td>2024-03-18</td>
-                <td>2024-04-01</td>
-            </tr>
-            <tr>
-                <td>Harry Potter and the Goblet of Fire</td>
-                <td>J.K. Rowling</td>
-                <td>2024-03-18</td>
-                <td>2024-04-01</td>
-            </tr>
-            <!-- Add more rows for other borrowed books -->
+          <tr>
+            <td>Harry Potter and the Prisoner of Azkaban</td>
+            <td>J.K. Rowling</td>
+            <td>2024-03-18</td>
+            <td>2024-04-01</td>
+          </tr>
+          <tr>
+            <td>Harry Potter and the Goblet of Fire</td>
+            <td>J.K. Rowling</td>
+            <td>2024-03-18</td>
+            <td>2024-04-01</td>
+          </tr>
+          <!-- Add more rows for other borrowed books -->
         </tbody>
-    </table>
-</body>
+      </table>
+    </div>
+  </body>
 </html>

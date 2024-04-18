@@ -2,28 +2,44 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>login page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="Login-Page.css" />
+    <title>Login Page</title>
   </head>
   <body>
-    <h1 style="text-align: center">Login</h1>
-
-    <fieldset>
-      <legend>Login</legend>
-      <form action="register_page.html">
+    <nav>
+      <div>
+        <a href="/">Online Library</a>
+      </div>
+      <div class="navlinks">
+        <a href="./Books.html">Books</a>
+        <a href="./Register-Page.html">Register</a>
+      </div>
+    </nav>
+    <div class="container">
+      <form action="Login-Page.html">
+        <h1>Login</h1>
         <div>
-          <label for="email"> email</label>
-          <input id="email" type="email" placeholder="@gmail.com" required />
+          <label for="email"> Email</label>
+          <input
+            id="email"
+            type="email"
+            placeholder="Enter your email"
+            required
+          />
         </div>
         <div>
-          <label for="password">password</label>
-          <input id="password" type="password" placeholder="" required />
+          <label for="password">Password</label>
+          <input
+            id="password"
+            type="password"
+            placeholder="Enter your password"
+            required
+          />
         </div>
-
-        <input type="submit" value="Login" />
+        <input type="submit" value="Login" class="submitbtn" />
+        <p>Don't have an account? <a href="Register-Page.html">Register</a></p>
       </form>
-      <p>You don't have an account. <a href="register_page.html">Register</a></p>
-    </fieldset>
-
-    <!--<p>switsh page to <a href="page1.html">page 1</a>.</p>  -->
+    </div>
   </body>
 </html>

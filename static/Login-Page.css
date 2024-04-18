@@ -1,0 +1,128 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  text-align: center;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 600px;
+}
+
+.container > form > div {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+nav {
+  background-color: #dd5746;
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 30px;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+nav div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+nav .navlinks {
+  display: flex;
+}
+
+form {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  margin-top: 20px;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: bold;
+  text-align: left;
+  width: 100%;
+  display: block;
+}
+.admin-checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.admin-checkbox label {
+  width: 55px;
+  min-width: 45px;
+}
+
+.admin-checkbox input {
+  width: 5%;
+  min-width: 15px;
+}
+
+input:focus::placeholder {
+  color: transparent;
+}
+
+input::placeholder {
+  transition: 0.25s;
+}
+
+input {
+  transition: 0.25s;
+  width: 100%;
+  padding: 8px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.submitbtn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.submitbtn:hover {
+  background-color: #45a049;
+}
+
+@media screen and (max-width: 600px) {
+  nav {
+    color: #fff;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+  }
+  nav div {
+    margin: 10px 0;
+  }
+}
