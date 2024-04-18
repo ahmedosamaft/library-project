@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="Add-Book.css" />
+    <title>Add Book</title>
+  </head>
+  <body>
+    <nav>
+      <div>
+        <a href="/">Online Library</a>
+      </div>
+      <div class="navlinks">
+        <a href="./Books.html">Books</a>
+        <a href="./Login-Page.html">Login</a>
+        <a href="./Register-Page.html">Register</a>
+      </div>
+    </nav>
+    <div class="container">
+      <form action="/submit_edit_book" method="post">
+        <h1>Add Book</h1>
+        <div>
+          <label for="title">Title</label>
+          <input type="text" id="title" name="title" placeholder="Enter Title" value="" />
+        </div>
+        <div>
+          <label for="author">Author</label>
+          <input type="text" id="author" name="author" placeholder="Enter Author" />
+        </div>
+        <div>
+          <label for="published_year">Published Year</label>
+          <input type="date" id="published_year" name="published_year" />
+        </div>
+        <div>
+          <label for="isbn">ISBN</label>
+          <input type="text" id="isbn" name="isbn" placeholder="Enter ISBN" />
+        </div>
+        <input type="submit" value="Submit" class="submitbtn" />
+      </form>
+    </div>
+  </body>
+</html>
