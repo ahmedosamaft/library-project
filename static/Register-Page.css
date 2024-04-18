@@ -3,7 +3,7 @@ body {
   background-color: #f4f4f4;
   margin: 0;
   padding: 0;
-  background-image: url('a2.jpeg');
+  background-image: url('a3.jpg');
   background-size: cover;
   background-position: center;
 }
@@ -24,8 +24,8 @@ body {
 }
 
 nav {
-  background-color: #dd5746;
-  color: #fff;
+  background-color: #124E66;
+  color: #D3D9D4;
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -51,8 +51,14 @@ nav div {
 nav .navlinks {
   display: flex;
 }
+
+/* nav > div > a {
+  color: black;
+} */
+
 form {
-  background-color: #fff;
+  background-color: #124E66;
+  color: #D3D9D4;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -78,7 +84,7 @@ label {
 
 .admin-checkbox input {
   width: 5%;
-  accent-color: green;
+  accent-color: #192732;
   margin-right: 3%;
   min-width: 15px;
 }
@@ -93,6 +99,8 @@ input::placeholder {
 
 input {
   transition: 0.25s;
+  background-color: #D3D9D4;
+  color: #124E66;
   width: 100%;
   padding: 8px;
   margin: 10px 0;
@@ -102,14 +110,14 @@ input {
 }
 
 .submitbtn {
-  background-color: #4caf50;
+  background-color: #192732;
   color: white;
   border: none;
   cursor: pointer;
 }
 
 .submitbtn:hover {
-  background-color: #45a049;
+  background-color: #203240;
 }
 
 @media screen and (max-width: 600px) {
