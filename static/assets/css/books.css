@@ -1,49 +1,3 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  margin: 0;
-  padding: 0;
-}
-
-nav {
-  background-color: #dd5746;
-  color: #fff;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 30px;
-}
-
-nav a {
-  color: #fff;
-  text-decoration: none;
-  margin: 0 10px;
-}
-
-nav div {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-}
-
-nav .navlinks {
-  display: flex;
-}
-
-.container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: self-start;
-}
-
 main {
   display: grid;
   grid-gap: 20px;
@@ -83,7 +37,7 @@ article p {
 article a {
   display: inline-block;
   padding: 5px 10px;
-  background-color: #4caf50;
+  background-color: var(--primary-color);
   color: #fff;
   text-decoration: none;
   border-radius: 3px;
@@ -142,14 +96,14 @@ article a:hover {
 
 .search-container input[type='text']:focus {
   outline: none;
-  border-color: #4caf50;
+  border-color: var(--primary-color);
 }
 
 .search-container button {
   padding: 10px;
   border: none;
   border-radius: 5px;
-  background-color: #4caf50;
+  background-color: var(--primary-color);
   color: #fff;
   cursor: pointer;
   transition: background-color 0.3s;

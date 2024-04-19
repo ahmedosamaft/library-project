@@ -1,39 +1,3 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  margin: 0;
-  padding: 0;
-}
-
-nav {
-  background-color: #dd5746;
-  color: #fff;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 30px;
-}
-
-nav a {
-  color: #fff;
-  text-decoration: none;
-  margin: 0 10px;
-}
-
-nav div {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-}
-
-nav .navlinks {
-  display: flex;
-}
-
 .container {
   max-width: 800px;
   text-align: center;
