@@ -1,17 +1,24 @@
+const container = document.getElementById('book-container');
+
 async function main() {
-  let books = await (await fetch('https://freetestapi.com/api/v1/books')).json();
-  console.log(books);
-  let container = document.getElementById('bookContainer');
+  const res = await fetch('https://freetestapi.com/api/v1/books');
+  const books = await res.json();
+
   books.forEach((book) => {
-    let card = `
-          <img src="${book.cover_image}" alt="${book.title} book cover" />
-          <h4>${book.title}</h4>
-          <p>${book.author}</p>
-  `;
-    let child = document.createElement('article');
-    child.id = book.id;
-    child.innerHTML = card;
-    container.appendChild(child);
+    const bookCard = document.createElement('article');
+
+    const content = `
+      <img src="${book.cover_image}" alt="${book.title} book cover" />
+      <div class="book-info">
+        <h4>${book.title}</h4>
+        <p>by ${book.author}</p>
+      </div>
+    `;
+
+    bookCard.innerHTML = content;
+
+    container.appendChild(bookCard);
   });
 }
+
 main();

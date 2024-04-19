@@ -10,7 +10,6 @@ article {
   background-color: #fff;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  padding: 20px;
   transition: 0.25s;
 }
 
@@ -22,16 +21,20 @@ article:hover {
 article img {
   max-width: 100%;
   height: auto;
-  border-radius: 5px;
+  border-radius: 5px 5px 0 0;
 }
 
-article h2 {
-  margin-top: 10px;
-  margin-bottom: 5px;
+article h4 {
+  margin: 0;
+  margin-bottom: 10px;
 }
 
 article p {
-  margin: 5px 0;
+  margin: 0;
+}
+
+article .book-info {
+  padding: 20px;
 }
 
 article a {
@@ -83,18 +86,11 @@ article a:hover {
   gap: 20px;
 }
 
-.search-container input[type='text'] {
-  width: 100%;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-  font-size: 16px;
-  background-color: #fff;
-  transition: border-color 0.3s;
+.search-container input {
+  margin: 0;
 }
 
-.search-container input[type='text']:focus {
+.search-container input:focus {
   outline: none;
   border-color: var(--primary-color);
 }
@@ -110,7 +106,7 @@ article a:hover {
 }
 
 .search-container button:hover {
-  background-color: #45a049;
+  background-color: var(--primary-dark-color);
 }
 
 h2 {
