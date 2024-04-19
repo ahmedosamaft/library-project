@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="Register-Page.css" />
+    <link rel="stylesheet" href="assets/css/register.css" />
     <title>Register Page</title>
   </head>
   <body>
@@ -11,15 +11,15 @@
         <a href="/">Online Library</a>
       </div>
       <div class="navlinks">
-        <a href="./Books.html">Books</a>
-        <a href="./Login-Page.html">Login</a>
+        <a href="books.html">Books</a>
+        <a href="login.html">Login</a>
       </div>
     </nav>
     <div class="container">
-      <form action="Register-Page.html">
+      <form action="/api/register" method="POST">
         <h1>Register</h1>
         <div>
-          <label for="name"> Name </label>
+          <label for="name">Name</label>
           <input
             id="name"
             type="text"
@@ -28,7 +28,7 @@
           />
         </div>
         <div>
-          <label for="email"> Email</label>
+          <label for="email">Email</label>
           <input
             id="email"
             type="email"
@@ -50,7 +50,7 @@
           <label for="user">Admin</label>
         </div>
         <input type="submit" value="Register" class="submitbtn" />
-        <p>Already have an account? <a href="Login-Page.html">Login</a></p>
+        <p>Already have an account? <a href="login.html">Login</a></p>
       </form>
     </div>
   </body>

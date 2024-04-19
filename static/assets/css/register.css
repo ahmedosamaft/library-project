@@ -3,7 +3,7 @@ body {
   background-color: #f4f4f4;
   margin: 0;
   padding: 0;
-  background-image: url('a3.jpg');
+  background-image: url('../images/library.jpg');
   background-size: cover;
   background-position: center;
 }

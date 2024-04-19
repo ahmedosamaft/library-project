@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="Login-Page.css" />
+    <link rel="stylesheet" href="assets/css/login.css" />
     <title>Login Page</title>
   </head>
   <body>
@@ -12,12 +12,12 @@
         <a href="/">Online Library</a>
       </div>
       <div class="navlinks">
-        <a href="./Books.html">Books</a>
-        <a href="./Register-Page.html">Register</a>
+        <a href="books.html">Books</a>
+        <a href="register.html">Register</a>
       </div>
     </nav>
     <div class="container">
-      <form action="Login-Page.html">
+      <form action="/api/login" method="POST">
         <h1>Login</h1>
         <div>
           <label for="email"> Email</label>
@@ -38,7 +38,7 @@
           />
         </div>
         <input type="submit" value="Login" class="submitbtn" />
-        <p>Don't have an account? <a href="Register-Page.html">Register</a></p>
+        <p>Don't have an account? <a href="register.html">Register</a></p>
       </form>
     </div>
   </body>
