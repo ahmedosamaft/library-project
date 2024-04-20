@@ -92,6 +92,8 @@ async function fetchBookById(id) {
  * so stick to using strings whenever possible.
  */
 class LibraryState {
+  onChangeListeners = [];
+
   constructor() {
     // Set the browser state from the search parameters in the URL.
     const url = new URL(window.location.href);
@@ -117,7 +119,8 @@ class LibraryState {
   }
 
   setState(state) {
-    const updatedState = { ...this.state, ...state };
+    const previousState = this.state;
+    const updatedState = { ...previousState, ...state };
 
     const url = new URL(window.location.href);
 
@@ -130,5 +133,25 @@ class LibraryState {
     });
 
     window.history.pushState(updatedState, '', url);
+
+    this.notifyChangeListeners(updatedState, previousState);
+  }
+
+  notifyChangeListeners(state, previousState) {
+    this.onChangeListeners.forEach((listener) => {
+      listener(state, previousState);
+    });
+  }
+
+  addOnChangeListener(listener) {
+    this.onChangeListeners.push(listener);
+
+    return () => this.removeOnChangeListener(listener);
+  }
+
+  removeOnChangeListener(listener) {
+    this.onChangeListeners = this.onChangeListeners.filter(
+      (item) => item !== listener
+    );
   }
 }
