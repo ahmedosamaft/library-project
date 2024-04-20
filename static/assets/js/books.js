@@ -1,22 +1,13 @@
 const container = document.getElementById('book-container');
+const searchParams = new URLSearchParams(window.location.search);
 
 async function main() {
-  const res = await fetch('https://freetestapi.com/api/v1/books');
-  const books = await res.json();
+  const page = searchParams.get('page');
+
+  const books = await fetchBooks(page);
 
   books.forEach((book) => {
-    const bookCard = document.createElement('article');
-
-    const content = `
-      <img src="${book.cover_image}" alt="${book.title} book cover" />
-      <div class="book-info">
-        <h4>${book.title}</h4>
-        <p>by ${book.author}</p>
-      </div>
-    `;
-
-    bookCard.innerHTML = content;
-
+    const bookCard = createBookCard(book);
     container.appendChild(bookCard);
   });
 }
