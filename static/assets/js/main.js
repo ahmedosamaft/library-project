@@ -1,5 +1,31 @@
 const API_BASE_URL = 'https://freetestapi.com/api/v1/';
 
+// Cache the current page and search query to avoid delay in pagination rendering.
+let cachedFetchPageCountSearch = null;
+let cachedBooksCount = null;
+async function fetchPagesCount({ booksPerPage = 20, search }) {
+  // NOTE: The current implementation is inefficient, it fetches all the movies
+  // and returns the length of the list, this is a limitation of the current
+  // API used, the fake books API, once this is implemented in our own API,
+  // we should have a separate endpoint to fetch the total number of books.
+  const isCached = cachedBooksCount !== null;
+  const isSameQuery = search?.trim() === cachedFetchPageCountSearch?.trim();
+  if (isCached && isSameQuery) {
+    return Math.ceil(cachedBooksCount / booksPerPage);
+  }
+
+  const url = new URL('books', API_BASE_URL);
+
+  if (search?.trim()) {
+    url.searchParams.append('search', search);
+  }
+
+  const res = await fetch(url);
+  const books = await res.json();
+
+  return Math.ceil(books.length / booksPerPage);
+}
+
 async function fetchBooks({ page = 1, limit = 20, search }) {
   const url = new URL('books', API_BASE_URL);
 

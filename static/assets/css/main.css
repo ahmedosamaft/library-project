@@ -1,6 +1,7 @@
 :root {
   --primary-color: #1256d3;
   --primary-light-color: #cddfff;
+  --primary-light-separator-color: #9bbffe;
   --primary-dark-color: #10439F;
 }
 
@@ -129,6 +130,50 @@ input:focus {
   align-items: center;
   justify-content: center;
   padding: 40px;
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-self: stretch;
+}
+
+.pagination-button {
+  background-color: var(--primary-light-color);
+  color: var(--primary-dark-color);
+  cursor: pointer;
+  padding: 10px 20px;
+  border: none;
+  border-left: 1px solid var(--primary-light-separator-color);
+  margin: 0;
+  transition: color 250ms ease-in-out, background-color 250ms ease-in-out;
+}
+
+.pagination-button:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.pagination-button.active {
+  background-color: var(--primary-color);
+  color: white;
+  cursor: pointer;
+  padding: 10px 20px;
+}
+
+.pagination-button:first-child {
+  border-radius: 5px 0 0 5px;
+  border-left: 0;
+}
+
+.pagination-button:last-child {
+  border-radius: 0 5px 5px 0;
+}
+
+.pagination-button:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
 }
 
 @keyframes rotation {
