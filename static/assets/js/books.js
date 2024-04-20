@@ -40,3 +40,21 @@ async function renderBooks({ page, search }) {
 
   container.replaceChildren(...bookCards);
 }
+
+function createBookCard(book) {
+  const bookCard = document.createElement('article');
+
+  const content = `
+    <img src="${book.cover_image}" alt="${book.title} book cover" />
+    <div class="book-info">
+      <h4>${book.title}</h4>
+      <p>by ${book.author}</p>
+
+      <a href="book-details.html?id=${book.id}">View Details</a>
+    </div>
+  `;
+
+  bookCard.innerHTML = content;
+
+  return bookCard;
+}

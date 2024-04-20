@@ -16,3 +16,37 @@ async function renderBookDetails(id) {
 const bookId = LibraryState.I.state.id;
 
 renderBookDetails(bookId);
+
+function createBookDetailsContent(book) {
+  const content = `
+    <div>
+      <div>
+        <img src="${book.cover_image}" alt="${book.title} book cover" />
+      </div>
+      <h2>${book.title}</h2>
+      <table>
+        <tr>
+          <th>Author</th>
+          <td>${book.author}</td>
+        </tr>
+        <tr>
+          <th>Category</th>
+          <td>${book.genre[0]}</td>
+        </tr>
+        <tr>
+          <th>Availability</th>
+          <!-- Hard-coded until we implement it in our API. -->
+          <td>Available</td>
+        </tr>
+      </table>
+
+      <button>Borrow</button>
+    </div>
+    <div>
+      <h3>Description</h3>
+      <p>${book.description}</p>
+    </div>
+  `;
+
+  return content;
+}
