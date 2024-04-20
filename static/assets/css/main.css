@@ -1,6 +1,7 @@
 :root {
-  --primary-color: #4caf50;
-  --primary-dark-color: #45a049;
+  --primary-color: #1256d3;
+  --primary-light-color: #cddfff;
+  --primary-dark-color: #10439F;
 }
 
 body {
@@ -37,6 +38,11 @@ nav a {
   color: #333;
   text-decoration: none;
   margin: 0 10px;
+  transition: color 250ms ease-in-out;
+}
+
+nav a:hover {
+  color: var(--primary-dark-color);
 }
 
 nav div {
@@ -115,6 +121,14 @@ input:focus {
 
 .hidden {
   display: none !important;
+}
+
+.loader-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
 }
 
 @keyframes rotation {

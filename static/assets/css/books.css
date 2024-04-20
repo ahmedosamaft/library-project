@@ -31,6 +31,7 @@ article h4 {
 
 article p {
   margin: 0;
+  margin-bottom: 15px;
 }
 
 article .book-info {
@@ -38,17 +39,19 @@ article .book-info {
 }
 
 article a {
-  display: inline-block;
-  padding: 5px 10px;
-  background-color: var(--primary-color);
-  color: #fff;
+  display: block;
+  text-align: center;
+  padding: 12px 16px;
+  background-color: var(--primary-light-color);
+  color: var(--primary-dark-color);
   text-decoration: none;
   border-radius: 3px;
   transition: background-color 0.3s;
 }
 
 article a:hover {
-  background-color: #45a049;
+  background-color: var(--primary-color);
+  color: white;
 }
 
 /* Responsive layout for phones */
@@ -111,12 +114,4 @@ article a:hover {
 
 h2 {
   margin-bottom: 0;
-}
-
-#books-loader {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 40px;
 }

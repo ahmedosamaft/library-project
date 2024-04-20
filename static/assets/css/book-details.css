@@ -3,13 +3,16 @@
   padding: 20px;
   text-align: center;
   margin: auto;
+}
+
+#book-details-container {
   display: flex;
   flex-direction: row;
   gap: 5%;
   justify-content: center;
 }
 
-.container > div {
+#book-details-container > div {
   max-width: 45%;
 }
 
@@ -52,7 +55,7 @@ button {
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: var(--primary-dark-color);
 }
 
 h2 {
@@ -84,10 +87,13 @@ p {
 @media screen and (max-width: 900px) {
   .container {
     max-width: 800px;
+  }
+
+  #book-details-container {
     flex-direction: column;
   }
 
-  .container > div {
+  #book-details-container > div {
     max-width: 100%;
   }
 }

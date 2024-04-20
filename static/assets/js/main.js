@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://freetestapi.com/api/v1/books';
+const API_BASE_URL = 'https://freetestapi.com/api/v1/';
 
 function createBookCard(book) {
   const bookCard = document.createElement('article');
@@ -8,6 +8,8 @@ function createBookCard(book) {
     <div class="book-info">
       <h4>${book.title}</h4>
       <p>by ${book.author}</p>
+
+      <a href="book-details.html?id=${book.id}">View Details</a>
     </div>
   `;
 
@@ -16,8 +18,42 @@ function createBookCard(book) {
   return bookCard;
 }
 
+function createBookDetailsContent(book) {
+  const content = `
+    <div>
+      <div>
+        <img src="${book.cover_image}" alt="${book.title} book cover" />
+      </div>
+      <h2>${book.title}</h2>
+      <table>
+        <tr>
+          <th>Author</th>
+          <td>${book.author}</td>
+        </tr>
+        <tr>
+          <th>Category</th>
+          <td>${book.genre[0]}</td>
+        </tr>
+        <tr>
+          <th>Availability</th>
+          <!-- Hard-coded until we implement it in our API. -->
+          <td>Available</td>
+        </tr>
+      </table>
+
+      <button>Borrow</button>
+    </div>
+    <div>
+      <h3>Description</h3>
+      <p>${book.description}</p>
+    </div>
+  `;
+
+  return content;
+}
+
 async function fetchBooks({ page = 1, limit = 20, search }) {
-  const url = new URL(API_BASE_URL);
+  const url = new URL('books', API_BASE_URL);
 
   if (isNaN(page)) {
     page = 1;
@@ -41,7 +77,7 @@ async function fetchBooks({ page = 1, limit = 20, search }) {
 }
 
 async function fetchBookById(id) {
-  const url = new URL(`/${id}`, API_BASE_URL);
+  const url = new URL(`books/${id}`, API_BASE_URL);
 
   const res = await fetch(url);
   const book = await res.json();
