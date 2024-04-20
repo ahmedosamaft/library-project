@@ -21,10 +21,20 @@
     <div class="container">
       <h2>Books</h2>
       <p>Explore our list of books!</p>
-      <form class="search-container">
-        <input type="text" placeholder="Search for books..." />
+
+      <form class="search-container" method="GET" action="books.html">
+        <input
+          id="search-input"
+          name="search"
+          type="text"
+          placeholder="Search for books..."
+        />
         <button type="submit">Search</button>
       </form>
+
+      <div id="books-loader">
+        <div class="loader"></div>
+      </div>
       <main id="book-container"></main>
     </div>
     <script src="assets/js/main.js"></script>
