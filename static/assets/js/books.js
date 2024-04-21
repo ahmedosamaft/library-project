@@ -81,7 +81,13 @@ function createBookCard(book) {
     <img src="${book.cover_image}" alt="${book.title} book cover" />
     <div class="book-info">
       <h4>${book.title}</h4>
-      <p>by ${book.author}</p>
+      <p>by <b>${book.author}</b>, in <b>${book.genre[0]}</b></p>
+
+      <p>${
+        book.description.length > 50
+          ? book.description.substring(0, 50) + '...'
+          : book.description
+      }</p>
 
       <a href="book-details.html?id=${book.id}">View Details</a>
     </div>
