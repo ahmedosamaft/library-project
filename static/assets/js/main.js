@@ -121,6 +121,65 @@ async function fetchBookById(id) {
   return book;
 }
 
+async function login({ email, password }) {
+  const url = new URL('login', API_BASE_URL);
+
+  const res = await fetch(url, {
+    method: 'POST',
+    body: JSON.stringify({ email, password }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!res.ok) {
+    throw new Error('Login failed.');
+  }
+
+  const data = await res.json();
+
+  return data;
+}
+
+async function register({ name, email, password, isAdmin }) {
+  const url = new URL('register', API_BASE_URL);
+
+  const res = await fetch(url, {
+    method: 'POST',
+    body: JSON.stringify({ name, email, password, isAdmin }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!res.ok) {
+    throw new Error('Registration failed.');
+  }
+
+  const data = await res.json();
+
+  return data;
+}
+
+function checkEmailFormat(email) {
+  const emailRegex = /^\S+@\S+\.\S+$/;
+
+  return emailRegex.test(email);
+}
+
+function displayError(message, input) {
+  // Each input is followed by a span.error element, we can put the message there
+  // we also set the error class on the input element
+
+  input.classList.add('error');
+  input.nextElementSibling.innerText = message;
+}
+
+function clearError(input) {
+  input.classList.remove('error');
+  input.nextElementSibling.innerText = '';
+}
+
 /**
  * A class to manage the state of the system and synchronize it with the URL.
  *

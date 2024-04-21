@@ -18,42 +18,41 @@
       </div>
     </nav>
     <div class="container">
-      <form action="/api/register" method="POST">
+      <form action="/api/register" method="POST" id="register-form">
         <h1>Register</h1>
         <div>
-          <label for="name">Name</label>
+          <label for="name-input">Name</label>
           <input
-            id="name"
+            id="name-input"
             type="text"
             placeholder="Enter your full name"
-            required
           />
+          <span class="error"></span>
         </div>
         <div>
-          <label for="email">Email</label>
-          <input
-            id="email"
-            type="email"
-            placeholder="Enter your email"
-            required
-          />
+          <label for="email-input">Email</label>
+          <input id="email-input" placeholder="Enter your email" />
+          <span class="error"></span>
         </div>
         <div>
-          <label for="password">Password</label>
+          <label for="password-input">Password</label>
           <input
-            id="password"
+            id="password-input"
             type="password"
             placeholder="Enter your password"
-            required
           />
+          <span class="error"></span>
         </div>
         <div class="admin-checkbox">
-          <input id="user" type="checkbox" value="user" name="type of user" />
-          <label for="user">Admin</label>
+          <input id="is-admin-input" type="checkbox" name="isAdmin" />
+          <label for="is-admin-input">Admin</label>
         </div>
         <input type="submit" value="Register" class="submitbtn" />
         <p>Already have an account? <a href="login.html">Login</a></p>
       </form>
     </div>
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/register.js"></script>
   </body>
 </html>

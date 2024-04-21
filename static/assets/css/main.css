@@ -179,6 +179,11 @@ input:focus {
   color: #ff3860;
 }
 
+span.error {
+  display: block;
+  text-align: left;
+}
+
 @keyframes rotation {
   from {
     transform: rotate(0deg);

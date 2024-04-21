@@ -19,29 +19,28 @@
       </div>
     </nav>
     <div class="container">
-      <form action="/api/login" method="POST">
+      <form action="/api/login" method="POST" id="login-form">
         <h1>Login</h1>
         <div>
-          <label for="email"> Email</label>
-          <input
-            id="email"
-            type="email"
-            placeholder="Enter your email"
-            required
-          />
+          <label for="email">Email</label>
+          <input id="email-input" placeholder="Enter your email" />
+          <span class="error"></span>
         </div>
         <div>
           <label for="password">Password</label>
           <input
-            id="password"
+            id="password-input"
             type="password"
             placeholder="Enter your password"
-            required
           />
+          <span class="error"></span>
         </div>
         <input type="submit" value="Login" class="submitbtn" />
         <p>Don't have an account? <a href="register.html">Register</a></p>
       </form>
     </div>
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/login.js"></script>
   </body>
 </html>
