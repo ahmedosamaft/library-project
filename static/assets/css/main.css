@@ -126,9 +126,7 @@ input:focus {
 
 .loader-container {
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  text-align: center;
   padding: 40px;
 }
 

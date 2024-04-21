@@ -49,7 +49,14 @@ async function fetchPagesCount({ booksPerPage = 20, title, author, category }) {
   return Math.ceil(books.length / booksPerPage);
 }
 
-async function fetchBooks({ page = 1, limit = 20, title, author, category }) {
+async function fetchBooks({
+  page = 1,
+  limit = 20,
+  title,
+  author,
+  category,
+  all,
+}) {
   const url = new URL('books', API_BASE_URL);
 
   if (isNaN(page)) {
@@ -61,7 +68,9 @@ async function fetchBooks({ page = 1, limit = 20, title, author, category }) {
   }
 
   url.searchParams.append('page', page);
-  url.searchParams.append('limit', limit);
+  if (!all) {
+    url.searchParams.append('limit', limit);
+  }
 
   let search = '';
 
