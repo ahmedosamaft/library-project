@@ -1,19 +1,20 @@
 const APIUrl = '';
 
-const form = document.getElementById('book_form');
-const imageInput = document.getElementById('book_cover');
-const imageElement = document.getElementById('book_cover_image');
-const coverContainer = document.getElementById('book_cover_container');
+const form = document.getElementById('book-form');
+const imageInput = document.getElementById('book-cover-input');
+const imageElement = document.getElementById('book-cover-input_image');
+const coverContainer = document.getElementById('book-cover-input-container');
 const allowedImageFormat = ['image/jpeg', 'image/jpg', 'image/png'];
 const maxImageSizeInMB = 5;
 
-const titleInput = document.getElementById('title');
-const authorInput = document.getElementById('author');
-const publishedYearInput = document.getElementById('published_year');
-const isbnInput = document.getElementById('isbn');
+const titleInput = document.getElementById('title-input');
+const authorInput = document.getElementById('author-input');
+const descriptionInput = document.getElementById('description-input');
+const categoryInput = document.getElementById('category-input');
 
 form.addEventListener('submit', async (event) => {
   event.preventDefault();
+
   if (!validateInputs()) {
     return;
   }
@@ -21,8 +22,8 @@ form.addEventListener('submit', async (event) => {
   const formData = new FormData();
   formData.append('title', titleInput.value.trim());
   formData.append('author', authorInput.value.trim());
-  formData.append('publishedYear', publishedYearInput.value);
-  formData.append('isbn', isbnInput.value.trim());
+  formData.append('description', descriptionInput.value);
+  formData.append('category', categoryInput.value.trim());
   formData.append('image', imageInput.files[0]);
 
   try {
@@ -65,14 +66,13 @@ function setSuccess(element) {
 function validateInputs() {
   const title = titleInput.value.trim();
   const author = authorInput.value.trim();
-  const publishedYear = publishedYearInput.value;
-  const isbn = isbnInput.value.trim();
+  const description = descriptionInput.value;
+  const category = categoryInput.value.trim();
   const image = imageInput.files[0];
 
   if (image === undefined) {
-    setError(imageInput, `Book cover is required`);
     imageElement.removeAttribute('src');
-    coverContainer.style.setProperty('display', 'none');
+    coverContainer.classList.add('hidden');
   } else {
     setSuccess(imageInput);
   }
@@ -89,16 +89,16 @@ function validateInputs() {
     setSuccess(authorInput);
   }
 
-  if (publishedYear === '') {
-    setError(publishedYearInput, 'Published Year is required');
+  if (description === '') {
+    setError(descriptionInput, 'Description is required');
   } else {
-    setSuccess(publishedYearInput);
+    setSuccess(descriptionInput);
   }
 
-  if (isbn === '') {
-    setError(isbnInput, 'Isbn is required');
+  if (category === '') {
+    setError(categoryInput, 'Category is required');
   } else {
-    setSuccess(isbnInput);
+    setSuccess(categoryInput);
   }
 }
 
@@ -108,9 +108,8 @@ imageInput.addEventListener('change', (event) => {
   const fileType = file?.type; // Mime type
 
   if (!imageInput.files.length) {
-    setError(imageInput, `Book cover is required`);
     imageElement.removeAttribute('src');
-    coverContainer.style.setProperty('display', 'none');
+    coverContainer.classList.add('hidden');
   } else {
     setSuccess(imageInput);
   }
@@ -119,25 +118,33 @@ imageInput.addEventListener('change', (event) => {
     setError(imageInput, $`File size exceeds ${maxImageSizeInMB}MB limit.`);
     event.target.value = '';
     imageElement.removeAttribute('src');
-    coverContainer.style.setProperty('display', 'none');
+    coverContainer.classList.add('hidden');
     return;
   }
 
   // Check if file type is not jpg, jpeg, or png
   if (!allowedImageFormat.includes(fileType)) {
-    setError(imageInput, `Only ${allowedImageFormat.map((e) => e.split('/')[1]).join(', ')} formats are allowed.`);
+    setError(
+      imageInput,
+      `Only ${allowedImageFormat
+        .map((e) => e.split('/')[1])
+        .join(', ')} formats are allowed.`
+    );
     event.target.value = '';
     imageElement.removeAttribute('src');
-    coverContainer.style.setProperty('display', 'none');
+    coverContainer.classList.add('hidden');
     return;
   }
 
   // If validation passes, display the selected image
   if (event?.target?.files && event?.target?.files.length) {
-    imageElement.setAttribute('src', URL.createObjectURL(event.target.files[0]));
-    coverContainer.style.setProperty('display', 'block');
+    imageElement.setAttribute(
+      'src',
+      URL.createObjectURL(event.target.files[0])
+    );
+    coverContainer.classList.remove('hidden');
   } else {
     imageElement.removeAttribute('src');
-    coverContainer.style.setProperty('display', 'none');
+    coverContainer.classList.add('hidden');
   }
 });

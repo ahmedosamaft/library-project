@@ -38,16 +38,12 @@ h1 {
   }
 }
 
-#book_cover_container {
+#book-cover-input-container {
   width: 50%;
 }
 
-#book_cover_image {
+#book-cover-input_image {
   width: 100%;
-}
-.error {
-  border-color: #ff3860;
-  color: #ff3860;
 }
 
 form div {

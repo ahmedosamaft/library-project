@@ -73,15 +73,15 @@ label {
   display: block;
 }
 
-input:focus::placeholder {
+input:focus::placeholder, textarea:focus::placeholder {
   color: transparent;
 }
 
-input::placeholder {
+input::placeholder, textarea::placeholder {
   transition: 125ms;
 }
 
-input {
+input, textarea {
   transition: border 250ms, background 250ms;
   width: 100%;
   padding: 12px 16px;
@@ -172,6 +172,11 @@ input:focus {
   background-color: #ccc;
   color: #666;
   cursor: not-allowed;
+}
+
+.error {
+  border-color: #ff3860;
+  color: #ff3860;
 }
 
 @keyframes rotation {
