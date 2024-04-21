@@ -50,11 +50,14 @@ h1 {
 }
 
 #book-cover-input-container {
-  width: 50%;
+  margin-bottom: 1rem;
 }
 
 #book-cover-input_image {
   width: 100%;
+  border-radius: 5px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
 }
 
 form div {
