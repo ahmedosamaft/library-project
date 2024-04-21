@@ -4,6 +4,8 @@
   margin: 0 auto;
   display: flex;
   justify-content: center;
+  flex-direction: row;
+  gap: 10px;
   height: 600px;
   align-items: center;
 }
