@@ -5,6 +5,8 @@
   display: flex;
   justify-content: center;
   height: 600px;
+  gap: 10px;
+  flex-direction: row;
   align-items: center;
 }
 
@@ -45,4 +47,20 @@ h1 {
   nav div {
     margin: 10px 0;
   }
+}
+
+#book_cover_container {
+  width: 50%;
+}
+
+#book_cover_image {
+  width: 100%;
+}
+.error {
+  border-color: #ff3860;
+  color: #ff3860;
+}
+
+form div {
+    text-align: left;
 }

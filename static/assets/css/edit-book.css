@@ -35,3 +35,19 @@ h1 {
     margin: 10px 0;
   }
 }
+
+#book_cover_container {
+  width: 50%;
+}
+
+#book_cover_image {
+  width: 100%;
+}
+.error {
+  border-color: #ff3860;
+  color: #ff3860;
+}
+
+form div {
+  text-align: left;
+}
