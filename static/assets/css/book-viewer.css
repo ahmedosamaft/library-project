@@ -1,5 +1,5 @@
 .container {
-  max-width: 800px;
+  max-width: 1200px;
   text-align: center;
   margin: 0 auto;
   padding: 20px;
@@ -8,6 +8,7 @@
   justify-content: center;
   align-items: self-start;
 }
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -27,7 +28,7 @@ th {
   color: #fff;
 }
 
-button, .action-buttons a {
+button, .action-button {
   padding: 5px 10px;
   background-color: var(--primary-color);
   color: white;
@@ -47,14 +48,6 @@ button:hover, .action-buttons a:hover {
 
 .table-header {
   display: flex;
-}
-
-.action-buttons {
-  text-align: center;
-}
-
-.action-buttons form {
-  display: inline-block;
 }
 
 .edit {

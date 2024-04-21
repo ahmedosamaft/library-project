@@ -16,9 +16,12 @@ function createBookItem(book) {
   const content = `
     <td>${book.title}</td>
     <td>${book.author}</td>
-    <td class="action-buttons">
-      <a href="edit-book.html?id=${book.id}" class="edit">Edit</a>
-
+    <td>${book.genre[0]}</td>
+    <td>${book.description}</td>
+    <td>
+      <a href="edit-book.html?id=${book.id}" class="edit action-button">Edit</a>
+    </td>
+    <td>
       <form method="POST" action="delete-book">
         <input type="hidden" name="id" value="${book.id}">
         <button type="submit" class="delete">Delete</button>
