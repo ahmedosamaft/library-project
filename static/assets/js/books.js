@@ -1,6 +1,8 @@
 const container = document.getElementById('book-container');
 const loader = document.getElementById('books-loader');
-const searchInput = document.getElementById('search-input');
+const searchTitleInput = document.getElementById('search-title-input');
+const searchAuthorInput = document.getElementById('search-author-input');
+const searchCategoryInput = document.getElementById('search-category-input');
 const searchForm = document.getElementById('search-form');
 const paginationContainer = document.getElementById('pagination-container');
 const previousPageButton = document.getElementById('prev-page');
@@ -8,7 +10,9 @@ const nextPageButton = document.getElementById('next-page');
 
 renderBooks({
   page: LibraryState.I.state.page,
-  search: LibraryState.I.state.search,
+  title: LibraryState.I.state.title,
+  author: LibraryState.I.state.author,
+  category: LibraryState.I.state.category,
 });
 
 renderPagination();
@@ -16,9 +20,11 @@ renderPagination();
 searchForm.addEventListener('submit', (event) => {
   event.preventDefault();
 
-  const search = searchInput.value.trim();
+  const title = searchTitleInput.value.trim();
+  const author = searchAuthorInput.value.trim();
+  const category = searchCategoryInput.value.trim();
 
-  const state = { search, page: '1' };
+  const state = { title, author, category, page: '1' };
 
   LibraryState.I.setState(state);
 
@@ -37,17 +43,27 @@ nextPageButton.addEventListener('click', () => {
   changePage(nextPage);
 });
 
-async function renderBooks({ page, search }) {
+async function renderBooks({ page, title, author, category }) {
   loader.classList.remove('hidden');
   container.classList.add('hidden');
 
-  if (search?.trim()) {
-    searchInput.value = search;
+  if (title?.trim()) {
+    searchTitleInput.value = title;
+  }
+
+  if (author?.trim()) {
+    searchAuthorInput.value = author;
+  }
+
+  if (category?.trim()) {
+    searchCategoryInput.value = category;
   }
 
   const books = await fetchBooks({
     page,
-    search,
+    title,
+    author,
+    category,
   });
 
   loader.classList.add('hidden');
@@ -77,8 +93,8 @@ function createBookCard(book) {
 }
 
 async function renderPagination() {
-  const { search } = LibraryState.I.state;
-  const pagesCount = await fetchPagesCount({ search });
+  const { title, author, category } = LibraryState.I.state;
+  const pagesCount = await fetchPagesCount({ title, author, category });
 
   const pages = Array.from({ length: pagesCount }, (_, index) => {
     return index + 1;
@@ -147,7 +163,9 @@ function changePage(page) {
 
   renderBooks({
     page,
-    search: LibraryState.I.state.search,
+    title: LibraryState.I.state.title,
+    author: LibraryState.I.state.author,
+    category: LibraryState.I.state.category,
   });
 
   const paginationButtons = document.querySelectorAll('.pagination-button');
@@ -168,11 +186,21 @@ function changePage(page) {
 }
 
 LibraryState.I.addOnChangeListener(async (state, previousState) => {
-  if (state.search != previousState.search) {
+  const hasTitleChanged = state.title !== previousState.title;
+  const hasAuthorChanged = state.author !== previousState.author;
+  const hasCategoryChanged = state.category !== previousState.category;
+  const hasSearchChanged =
+    hasTitleChanged || hasAuthorChanged || hasCategoryChanged;
+
+  if (hasSearchChanged) {
     renderPagination();
   }
 
-  const pagesCount = await fetchPagesCount({ search: state.search });
+  const pagesCount = await fetchPagesCount({
+    title: state.title,
+    author: state.author,
+    category: state.category,
+  });
 
   togglePreviousNextButtons(state.page, pagesCount);
 });

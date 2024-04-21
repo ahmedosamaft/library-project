@@ -22,12 +22,29 @@
       <h2>Books</h2>
       <p>Explore our list of books!</p>
 
-      <form class="search-container" id="search-form">
+      <form
+        class="search-container"
+        id="search-form"
+        method="GET"
+        action="index.html"
+      >
         <input
-          id="search-input"
-          name="search"
+          id="search-title-input"
+          name="title"
           type="text"
-          placeholder="Search for books..."
+          placeholder="Book title"
+        />
+        <input
+          id="search-author-input"
+          name="author"
+          type="text"
+          placeholder="Author"
+        />
+        <input
+          id="search-category-input"
+          name="category"
+          type="text"
+          placeholder="Category"
         />
         <button type="submit">Search</button>
       </form>

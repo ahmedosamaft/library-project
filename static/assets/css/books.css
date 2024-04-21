@@ -60,10 +60,48 @@ article a:hover {
   color: white;
 }
 
+
+.search-container {
+  display: flex;
+  align-self: stretch;
+  gap: 10px;
+}
+
+.search-container input {
+  margin: 0;
+}
+
+.search-container input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.search-container button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--primary-color);
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.search-container button:hover {
+  background-color: var(--primary-dark-color);
+}
+
+h2 {
+  margin-bottom: 0;
+}
+
 /* Responsive layout for phones */
 @media only screen and (max-width: 480px) {
   main {
     grid-template-columns: 1fr;
+  }
+
+  .search-container {
+    flex-direction: column;
   }
 }
 
@@ -88,36 +126,4 @@ article a:hover {
   .container {
     max-width: 1200px;
   }
-}
-
-.search-container {
-  display: flex;
-  gap: 20px;
-}
-
-.search-container input {
-  margin: 0;
-}
-
-.search-container input:focus {
-  outline: none;
-  border-color: var(--primary-color);
-}
-
-.search-container button {
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  background-color: var(--primary-color);
-  color: #fff;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.search-container button:hover {
-  background-color: var(--primary-dark-color);
-}
-
-h2 {
-  margin-bottom: 0;
 }

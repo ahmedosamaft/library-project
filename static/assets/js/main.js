@@ -1,22 +1,45 @@
 const API_BASE_URL = 'https://freetestapi.com/api/v1/';
 
 // Cache the current page and search query to avoid delay in pagination rendering.
-let cachedFetchPageCountSearch = null;
+let cachedFetchPageCountTitle = null;
+let cachedFetchPageCountAuthor = null;
+let cachedFetchPageCountCategory = null;
 let cachedBooksCount = null;
-async function fetchPagesCount({ booksPerPage = 20, search }) {
+async function fetchPagesCount({ booksPerPage = 20, title, author, category }) {
   // NOTE: The current implementation is inefficient, it fetches all the movies
   // and returns the length of the list, this is a limitation of the current
   // API used, the fake books API, once this is implemented in our own API,
   // we should have a separate endpoint to fetch the total number of books.
   const isCached = cachedBooksCount !== null;
-  const isSameQuery = search?.trim() === cachedFetchPageCountSearch?.trim();
+  const isSameTitle = title?.trim() === cachedFetchPageCountTitle?.trim();
+  const isSameAuthor = author?.trim() === cachedFetchPageCountAuthor?.trim();
+  const isSameCategory =
+    category?.trim() === cachedFetchPageCountCategory?.trim();
+  const isSameQuery = isSameTitle && isSameAuthor && isSameCategory;
   if (isCached && isSameQuery) {
     return Math.ceil(cachedBooksCount / booksPerPage);
   }
 
   const url = new URL('books', API_BASE_URL);
 
-  if (search?.trim()) {
+  let search = '';
+
+  if (title?.trim()) {
+    search += title;
+    cachedFetchPageCountTitle = title;
+  }
+
+  if (author?.trim()) {
+    search += ` ${author}`;
+    cachedFetchPageCountAuthor = author;
+  }
+
+  if (category?.trim()) {
+    search += ` ${category}`;
+    cachedFetchPageCountCategory = category;
+  }
+
+  if (search.trim()) {
     url.searchParams.append('search', search);
   }
 
@@ -26,7 +49,7 @@ async function fetchPagesCount({ booksPerPage = 20, search }) {
   return Math.ceil(books.length / booksPerPage);
 }
 
-async function fetchBooks({ page = 1, limit = 20, search }) {
+async function fetchBooks({ page = 1, limit = 20, title, author, category }) {
   const url = new URL('books', API_BASE_URL);
 
   if (isNaN(page)) {
@@ -40,7 +63,21 @@ async function fetchBooks({ page = 1, limit = 20, search }) {
   url.searchParams.append('page', page);
   url.searchParams.append('limit', limit);
 
-  if (search?.trim()) {
+  let search = '';
+
+  if (title?.trim()) {
+    search += title;
+  }
+
+  if (author?.trim()) {
+    search += ` ${author}`;
+  }
+
+  if (category?.trim()) {
+    search += ` ${category}`;
+  }
+
+  if (search.trim()) {
     url.searchParams.append('search', search);
   }
 
