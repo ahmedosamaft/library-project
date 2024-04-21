@@ -14,7 +14,7 @@
       </div>
       <div class="navlinks">
         <a href="/">Books</a>
-        <a href="borrowed-/">Borrowed Books</a>
+        <a href="borrowed-books.html">Borrowed Books</a>
         <a href="login.html">Login</a>
         <a href="register.html">Register</a>
       </div>
@@ -33,22 +33,17 @@
             <th>Return Date</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="books-list-container">
           <tr>
-            <td>Harry Potter and the Prisoner of Azkaban</td>
-            <td>J.K. Rowling</td>
-            <td>2024-03-18</td>
-            <td>2024-04-01</td>
+            <td colspan="4" class="loader-container">
+              <div class="loader"></div>
+            </td>
           </tr>
-          <tr>
-            <td>Harry Potter and the Goblet of Fire</td>
-            <td>J.K. Rowling</td>
-            <td>2024-03-18</td>
-            <td>2024-04-01</td>
-          </tr>
-          <!-- Add more rows for other borrowed books -->
         </tbody>
       </table>
     </div>
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/borrowed-books.js"></script>
   </body>
 </html>

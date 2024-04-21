@@ -49,6 +49,22 @@ async function fetchPagesCount({ booksPerPage = 20, title, author, category }) {
   return Math.ceil(books.length / booksPerPage);
 }
 
+async function fetchBorrowedBooks() {
+  // NOTE: a dummy implementation to fetch borrowed books, this should be
+  // implemented in the API.
+  const books = await fetchBooks({ all: true, title: 'The' });
+
+  return books.map((book, i) => ({
+    ...book,
+    borrowDate: new Date(
+      Date.now() - (i + 1) * 24 * 3600 * 1000
+    ).toDateString(),
+    returnDate: new Date(
+      Date.now() + (books.length - i) * 24 * 3600 * 1000
+    ).toDateString(),
+  }));
+}
+
 async function fetchBooks({
   page = 1,
   limit = 20,
