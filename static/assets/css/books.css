@@ -24,6 +24,8 @@ article img {
   max-width: 100%;
   height: auto;
   border-radius: 5px 5px 0 0;
+  aspect-ratio: 677 / 800;
+  background: var(--primary-light-color);
 }
 
 article h4 {
