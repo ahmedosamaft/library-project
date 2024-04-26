@@ -14,7 +14,12 @@ form.addEventListener('submit', async (event) => {
 
   // TODO: The login will be fully implemented once the API is implemented.
   try {
-    await login({ email, password });
+    const { isAdmin } = await login({ email, password });
+    if (isAdmin) {
+      window.location.href = '/book-viewer.html';
+    } else {
+      window.location.href = '/';
+    }
   } catch (error) {
     console.error(error);
     alert('An error occurred while logging in. Please try again.');

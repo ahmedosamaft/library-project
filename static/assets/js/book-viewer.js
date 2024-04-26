@@ -22,7 +22,7 @@ function createBookItem(book) {
       <a href="edit-book.html?id=${book.id}" class="edit action-button">Edit</a>
     </td>
     <td>
-      <form method="POST" action="delete-book">
+      <form method="POST" action="${API_BASE_URL}books/${book.id}/delete?redirect=http://localhost:5500/book-viewer.html">
         <input type="hidden" name="id" value="${book.id}">
         <button type="submit" class="delete">Delete</button>
       </form>

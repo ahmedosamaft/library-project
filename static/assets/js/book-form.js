@@ -19,28 +19,17 @@ form.addEventListener('submit', async (event) => {
     return;
   }
 
-  const formData = new FormData();
-  formData.append('title', titleInput.value.trim());
-  formData.append('author', authorInput.value.trim());
-  formData.append('description', descriptionInput.value);
-  formData.append('category', categoryInput.value.trim());
-  formData.append('image', imageInput.files[0]);
+  const formData = {
+    title: titleInput.value.trim(),
+    author: authorInput.value.trim(),
+    description: descriptionInput.value,
+    category: categoryInput.value.trim(),
+  };
+
+  // formData.append('image', imageInput.files[0]);
 
   try {
-    const response = await fetch(APIUrl, {
-      method: 'POST',
-      body: formData,
-    });
-
-    if (response.ok) {
-      // Server response is OK
-      console.log('Data sent successfully');
-      // Optionally, reset the form
-      form.reset();
-    } else {
-      // Server responded with an error
-      console.error('Error sending data to server');
-    }
+    await onSubmitBookForm(formData);
   } catch (error) {
     // An error occurred during the fetch operation
     console.error('Error:', error);
@@ -100,6 +89,8 @@ function validateInputs() {
   } else {
     setSuccess(categoryInput);
   }
+
+  return true;
 }
 
 imageInput.addEventListener('change', (event) => {

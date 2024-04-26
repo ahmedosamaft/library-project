@@ -19,6 +19,11 @@ form.addEventListener('submit', async (event) => {
   // TODO: The register will be fully implemented once the API is implemented.
   try {
     await register({ name, email, password, isAdmin });
+    if (isAdmin) {
+      window.location.href = '/book-viewer.html';
+    } else {
+      window.location.href = '/';
+    }
   } catch (error) {
     console.error(error);
     alert('An error occurred in registration. Please try again.');

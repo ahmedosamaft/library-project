@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://freetestapi.com/api/v1/';
+const API_BASE_URL = 'http://localhost:3000/';
 
 // Cache the current page and search query to avoid delay in pagination rendering.
 let cachedFetchPageCountTitle = null;
@@ -20,31 +20,7 @@ async function fetchPagesCount({ booksPerPage = 20, title, author, category }) {
     return Math.ceil(cachedBooksCount / booksPerPage);
   }
 
-  const url = new URL('books', API_BASE_URL);
-
-  let search = '';
-
-  if (title?.trim()) {
-    search += title;
-    cachedFetchPageCountTitle = title;
-  }
-
-  if (author?.trim()) {
-    search += ` ${author}`;
-    cachedFetchPageCountAuthor = author;
-  }
-
-  if (category?.trim()) {
-    search += ` ${category}`;
-    cachedFetchPageCountCategory = category;
-  }
-
-  if (search.trim()) {
-    url.searchParams.append('search', search);
-  }
-
-  const res = await fetch(url);
-  const books = await res.json();
+  const books = await fetchBooks({ title, author, category, all: true });
 
   return Math.ceil(books.length / booksPerPage);
 }
@@ -88,22 +64,16 @@ async function fetchBooks({
     url.searchParams.append('limit', limit);
   }
 
-  let search = '';
-
   if (title?.trim()) {
-    search += title;
+    url.searchParams.append('title', title);
   }
 
   if (author?.trim()) {
-    search += ` ${author}`;
+    url.searchParams.append('author', author);
   }
 
   if (category?.trim()) {
-    search += ` ${category}`;
-  }
-
-  if (search.trim()) {
-    url.searchParams.append('search', search);
+    url.searchParams.append('category', category);
   }
 
   const res = await fetch(url);
