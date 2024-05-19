@@ -15,6 +15,7 @@ class BookSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class BorrowedListSerializer(serializers.ModelSerializer):
+    book = BookSerializer()
     class Meta:
         model = BorrowedList
         fields = '__all__'
