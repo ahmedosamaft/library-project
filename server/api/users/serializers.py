@@ -1,17 +1,10 @@
 from rest_framework import serializers
-from .models import Profile
 from django.contrib.auth.models import User
 
 
-class ProfileSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Profile
-        fields = ['name']
-
-
 class UserSerializer(serializers.ModelSerializer):
-    profile = ProfileSerializer(read_only=True)
-
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'profile']
+        # Note: the 'username' field is meant to store the user's email as our
+        # library system doesn't use usernames but rather emails.
+        fields = ['id', 'username', 'is_staff', 'first_name', 'last_name']
