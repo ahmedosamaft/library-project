@@ -52,7 +52,9 @@ form.addEventListener('submit', async (event) => {
   const password = passwordInput.value;
 
   try {
-    const [first_name, last_name] = name.split(' ', 2);
+    const names = name.split(' ');
+    const first_name = names[0];
+    const last_name = names.slice(1).join(' ');
 
     const response = await $fetch(API_BASE_URL + 'users/register/', {
       method: 'POST',
@@ -75,9 +77,9 @@ form.addEventListener('submit', async (event) => {
       window.location.href = 'index.html';
     } else {
       const errorData = await response.json();
-      console.error('Login failed', errorData);
+      console.error('Registration', errorData);
       document.querySelector('.error').textContent =
-        'Login failed: ' + (errorData.detail || 'Unknown error');
+        'Registration: ' + (errorData.detail || 'Unknown error');
     }
   } catch (error) {
     console.error('An error occurred:', error);
