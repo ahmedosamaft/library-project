@@ -41,47 +41,47 @@ function validateInputs() {
   return isValid;
 }
 
-document
-  .getElementById('register-form')
-  .addEventListener('submit', async (event) => {
-    event.preventDefault();
-    if (!validateInputs()) {
-      return;
-    }
-    const name = nameInput.value.trim();
-    const isAdmin = isAdminInput;
-    const email = document.getElementById('email-input').value;
-    const password = document.getElementById('password-input').value;
+form.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  if (!validateInputs()) {
+    return;
+  }
+  const name = nameInput.value.trim();
+  const is_staff = isAdminInput;
+  const email = emailInput.value;
+  const password = passwordInput.value;
 
-    try {
-      const response = await $fetch(API_BASE_URL + 'users/register/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          first_name: name,
-          last_name: 'p',
-          is_stuff: isAdmin,
-          username: email,
-          password: password,
-        }),
-      });
-      console.log(response);
-      if (response.ok) {
-        const data = await response.json();
-        localStorage.setItem('access_token', data.access);
-        localStorage.setItem('refresh_token', data.refresh);
-        window.location.href = 'index.html';
-      } else {
-        const errorData = await response.json();
-        console.error('Login failed', errorData);
-        document.querySelector('.error').textContent =
-          'Login failed: ' + (errorData.detail || 'Unknown error');
-      }
-    } catch (error) {
-      console.error('An error occurred:', error);
+  try {
+    const [first_name, last_name] = name.split(' ', 2);
+
+    const response = await $fetch(API_BASE_URL + 'users/register/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        first_name,
+        last_name,
+        is_staff,
+        password,
+        username: email,
+      }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      localStorage.setItem('access_token', data.access);
+      localStorage.setItem('refresh_token', data.refresh);
+      window.location.href = 'index.html';
+    } else {
+      const errorData = await response.json();
+      console.error('Login failed', errorData);
       document.querySelector('.error').textContent =
-        'An error occurred: ' + error.message;
+        'Login failed: ' + (errorData.detail || 'Unknown error');
     }
-  });
+  } catch (error) {
+    console.error('An error occurred:', error);
+    document.querySelector('.error').textContent =
+      'An error occurred: ' + error.message;
+  }
+});
