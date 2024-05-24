@@ -90,7 +90,7 @@ def borrow_book(request, book_id):
 @permission_classes([IsAuthenticated])
 def get_borrowed_books(request):
     user = request.user
-    borrowed_books = BorrowedList.objects.filter(user=user)
+    borrowed_books = BorrowedList.objects.filter(user=user).order_by('-borrowed_time')
     serializer = BorrowedListSerializer(borrowed_books, many=True)
     return Response(serializer.data)
 
