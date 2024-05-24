@@ -46,7 +46,7 @@ function createBookDetailsContent(book) {
         </tr>
       </table>
 
-      <button>Borrow</button>
+      <button onclick="borrowBook(${book.id})">Borrow</button>
     </div>
     <div>
       <h3>Description</h3>
@@ -55,4 +55,16 @@ function createBookDetailsContent(book) {
   `;
 
   return content;
+}
+
+async function borrowBook(bookId) {
+  const res = await $fetch(`${API_BASE_URL}books/${bookId}/borrow/`, {
+    method: 'POST',
+  });
+
+  if (res.ok) {
+    location.href = '/borrowed-books.html';
+  } else {
+    alert('Failed to borrow book.');
+  }
 }
