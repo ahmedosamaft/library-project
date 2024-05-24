@@ -1,42 +1,44 @@
-document
-  .getElementById('login-form')
-  .addEventListener('submit', async (event) => {
-    event.preventDefault();
-    if (!validateInputs()) {
-      return;
-    }
-    const email = document.getElementById('email-input').value;
-    const password = document.getElementById('password-input').value;
+const form = document.getElementById('login-form');
+const emailInput = document.getElementById('email-input');
+const passwordInput = document.getElementById('password-input');
 
-    try {
-      const response = await fetch(API_BASE_URL + 'users/login/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username: email,
-          password: password,
-        }),
-      });
-      console.log(response);
-      if (response.ok) {
-        const data = await response.json();
-        localStorage.setItem('access_token', data.access);
-        localStorage.setItem('refresh_token', data.refresh);
-        window.location.href = 'index.html';
-      } else {
-        const errorData = await response.json();
-        console.error('Login failed', errorData);
-        document.querySelector('.error').textContent =
-          'Login failed: ' + (errorData.detail || 'Unknown error');
-      }
-    } catch (error) {
-      console.error('An error occurred:', error);
+form.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  if (!validateInputs()) {
+    return;
+  }
+  const email = emailInput.value;
+  const password = passwordInput.value;
+
+  try {
+    const response = await fetch(API_BASE_URL + 'users/login/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: email,
+        password: password,
+      }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      localStorage.setItem('access_token', data.access);
+      localStorage.setItem('refresh_token', data.refresh);
+      window.location.href = 'index.html';
+    } else {
+      const errorData = await response.json();
+
       document.querySelector('.error').textContent =
-        'An error occurred: ' + error.message;
+        'Login failed: ' + (errorData.detail || 'Unknown error');
     }
-  });
+  } catch (error) {
+    console.error('An error occurred:', error);
+    document.querySelector('.error').textContent =
+      'An error occurred: ' + error.message;
+  }
+});
 
 function validateInputs() {
   const email = emailInput.value.trim();
