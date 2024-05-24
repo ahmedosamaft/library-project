@@ -298,7 +298,6 @@ function renderNavLinks() {
     navLinks.innerHTML += `
       <a href="book-viewer.html">Manage Books</a>
       <a href="add-book.html">Add Book</a>
-      <a href="#" onclick="logout()">Logout</a>
     `;
   }
 
