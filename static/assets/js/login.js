@@ -26,6 +26,7 @@ form.addEventListener('submit', async (event) => {
       const data = await response.json();
       localStorage.setItem('access_token', data.access);
       localStorage.setItem('refresh_token', data.refresh);
+      localStorage.setItem('is_admin', data.user.is_staff);
       window.location.href = 'index.html';
     } else {
       const errorData = await response.json();

@@ -260,6 +260,7 @@ async function $fetch(url, options = {}) {
       const data = await refreshResponse.json();
 
       localStorage.setItem('access_token', data.access);
+      localStorage.setItem('is_admin', data.user.is_staff);
 
       return $fetch(url, options);
     } else if (
@@ -270,8 +271,49 @@ async function $fetch(url, options = {}) {
     ) {
       localStorage.removeItem('access_token');
       localStorage.removeItem('refresh_token');
+      localStorage.removeItem('is_admin');
     }
   }
 
   return res;
 }
+
+/**
+ * Renders the appropriate navigation links based on the user's authentication status (admin, user, or anonymous)
+ *
+ * A typical navigation structure looks like this:
+ * <div class="navlinks">
+        <a href="/">Books</a>
+        <a href="book-viewer.html">Manage Books</a>
+        <a href="add-book.html">Add Book</a>
+        <a href="login.html">Login</a>
+        <a href="register.html">Register</a>
+      </div>
+ */
+function renderNavLinks() {
+  const navLinks = document.querySelector('.navlinks');
+
+  if (!navLinks) {
+    return;
+  }
+
+  const accessToken = localStorage.getItem('access_token');
+  const isAdmin = localStorage.getItem('is_admin');
+
+  if (accessToken) {
+    navLinks.innerHTML = `
+      <a href="/">Books</a>
+      ${isAdmin === 'true' ? '<a href="book-viewer.html">Manage Books</a>' : ''}
+      <a href="add-book.html">Add Book</a>
+      <a href="logout.html">Logout</a>
+    `;
+  } else {
+    navLinks.innerHTML = `
+      <a href="/">Books</a>
+      <a href="login.html">Login</a>
+      <a href="register.html">Register</a>
+    `;
+  }
+}
+
+renderNavLinks();
