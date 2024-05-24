@@ -16,6 +16,7 @@ def book_list_create(request):
         return Response(serializer.data)
 
     elif request.method == 'POST':
+        print(request.data)
         genres_string = request.data.pop('genres', None)[0]
         genres = []
         if genres_string:

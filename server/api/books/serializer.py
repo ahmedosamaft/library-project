@@ -19,3 +19,4 @@ class BorrowedListSerializer(serializers.ModelSerializer):
     class Meta:
         model = BorrowedList
         fields = '__all__'
+

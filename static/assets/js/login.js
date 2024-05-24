@@ -1,30 +1,42 @@
-const form = document.getElementById('login-form');
-const emailInput = document.getElementById('email-input');
-const passwordInput = document.getElementById('password-input');
-
-form.addEventListener('submit', async (event) => {
-  event.preventDefault();
-
-  if (!validateInputs()) {
-    return;
-  }
-
-  const email = emailInput.value.trim();
-  const password = passwordInput.value.trim();
-
-  // TODO: The login will be fully implemented once the API is implemented.
-  try {
-    const { isAdmin } = await login({ email, password });
-    if (isAdmin) {
-      window.location.href = '/book-viewer.html';
-    } else {
-      window.location.href = '/';
+document
+  .getElementById('login-form')
+  .addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (!validateInputs()) {
+      return;
     }
-  } catch (error) {
-    console.error(error);
-    alert('An error occurred while logging in. Please try again.');
-  }
-});
+    const email = document.getElementById('email-input').value;
+    const password = document.getElementById('password-input').value;
+
+    try {
+      const response = await fetch(API_BASE_URL + 'users/login/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: email,
+          password: password,
+        }),
+      });
+      console.log(response);
+      if (response.ok) {
+        const data = await response.json();
+        localStorage.setItem('access_token', data.access);
+        localStorage.setItem('refresh_token', data.refresh);
+        window.location.href = 'index.html';
+      } else {
+        const errorData = await response.json();
+        console.error('Login failed', errorData);
+        document.querySelector('.error').textContent =
+          'Login failed: ' + (errorData.detail || 'Unknown error');
+      }
+    } catch (error) {
+      console.error('An error occurred:', error);
+      document.querySelector('.error').textContent =
+        'An error occurred: ' + error.message;
+    }
+  });
 
 function validateInputs() {
   const email = emailInput.value.trim();

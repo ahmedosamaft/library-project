@@ -18,10 +18,16 @@ const bookId = LibraryState.I.state.id;
 renderBookDetails(bookId);
 
 function createBookDetailsContent(book) {
+  const genreList =
+    book.genres.length > 0
+      ? book.genres.map((genre) => genre.name).join(' - ')
+      : 'No Genres';
   const content = `
     <div>
       <div>
-        <img src="${book.cover_image}" alt="${book.title} book cover" />
+        <img src="${BASE_URL + book.cover_image}" alt="${
+    book.title
+  } book cover" />
       </div>
       <h2>${book.title}</h2>
       <table>
@@ -31,7 +37,7 @@ function createBookDetailsContent(book) {
         </tr>
         <tr>
           <th>Category</th>
-          <td>${book.genre[0]}</td>
+          <td>${genreList}</td>
         </tr>
         <tr>
           <th>Availability</th>

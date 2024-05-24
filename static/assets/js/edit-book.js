@@ -21,7 +21,7 @@ async function onSubmitBookForm(formData) {
   });
 
   if (response.ok) {
-    window.location.href = '/book-viewer.html';
+    window.location.href = BASE_URL + 'book-viewer.html';
   } else {
     // Server responded with an error
     console.error('Error sending data to server');

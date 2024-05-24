@@ -1,8 +1,11 @@
 async function onSubmitBookForm(formData) {
-  const response = await fetch(`${API_BASE_URL}books`, {
+  console.log(formData);
+  const accessToken = localStorage.getItem('access_token');
+  const response = await fetch(`${API_BASE_URL}books/`, {
     method: 'POST',
-    body: JSON.stringify(formData),
+    body: formData,
     headers: {
+      Authorization: `Bearer ${accessToken}`,
       'Content-Type': 'application/json',
     },
   });

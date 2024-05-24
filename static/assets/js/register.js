@@ -4,32 +4,6 @@ const emailInput = document.getElementById('email-input');
 const passwordInput = document.getElementById('password-input');
 const isAdminInput = document.getElementById('is-admin-input');
 
-form.addEventListener('submit', async (event) => {
-  event.preventDefault();
-
-  if (!validateInputs()) {
-    return;
-  }
-
-  const name = nameInput.value.trim();
-  const email = emailInput.value.trim();
-  const password = passwordInput.value.trim();
-  const isAdmin = isAdminInput.checked;
-
-  // TODO: The register will be fully implemented once the API is implemented.
-  try {
-    await register({ name, email, password, isAdmin });
-    if (isAdmin) {
-      window.location.href = '/book-viewer.html';
-    } else {
-      window.location.href = '/';
-    }
-  } catch (error) {
-    console.error(error);
-    alert('An error occurred in registration. Please try again.');
-  }
-});
-
 function validateInputs() {
   const name = nameInput.value.trim();
   const email = emailInput.value.trim();
@@ -66,3 +40,48 @@ function validateInputs() {
 
   return isValid;
 }
+
+document
+  .getElementById('register-form')
+  .addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (!validateInputs()) {
+      return;
+    }
+    const name = nameInput.value.trim();
+    const isAdmin = isAdminInput;
+    const email = document.getElementById('email-input').value;
+    const password = document.getElementById('password-input').value;
+
+    try {
+      const response = await fetch(API_BASE_URL + 'users/register/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          first_name: name,
+          last_name: 'p',
+          is_stuff: isAdmin,
+          username: email,
+          password: password,
+        }),
+      });
+      console.log(response);
+      if (response.ok) {
+        const data = await response.json();
+        localStorage.setItem('access_token', data.access);
+        localStorage.setItem('refresh_token', data.refresh);
+        window.location.href = 'index.html';
+      } else {
+        const errorData = await response.json();
+        console.error('Login failed', errorData);
+        document.querySelector('.error').textContent =
+          'Login failed: ' + (errorData.detail || 'Unknown error');
+      }
+    } catch (error) {
+      console.error('An error occurred:', error);
+      document.querySelector('.error').textContent =
+        'An error occurred: ' + error.message;
+    }
+  });

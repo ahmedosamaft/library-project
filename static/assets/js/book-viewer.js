@@ -12,17 +12,20 @@ async function renderBooks() {
 
 function createBookItem(book) {
   const bookItem = document.createElement('tr');
-
+  const genreList =
+    book.genres.length > 0
+      ? book.genres.map((genre) => genre.name).join(' - ')
+      : 'No Genres';
   const content = `
     <td>${book.title}</td>
     <td>${book.author}</td>
-    <td>${book.genre[0]}</td>
+    <td>${genreList}</td>
     <td>${book.description}</td>
     <td>
       <a href="edit-book.html?id=${book.id}" class="edit action-button">Edit</a>
     </td>
     <td>
-      <form method="POST" action="${API_BASE_URL}books/${book.id}/delete?redirect=http://localhost:5500/book-viewer.html">
+      <form method="GET" action="${API_BASE_URL}/books/${book.id}/delete?redirect=http://localhost:5500/book-viewer.html">
         <input type="hidden" name="id" value="${book.id}">
         <button type="submit" class="delete">Delete</button>
       </form>

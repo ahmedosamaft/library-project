@@ -4,6 +4,7 @@ const form = document.getElementById('book-form');
 const imageInput = document.getElementById('book-cover-input');
 const imageElement = document.getElementById('book-cover-input_image');
 const coverContainer = document.getElementById('book-cover-input-container');
+const year = document.getElementById('year-input');
 const allowedImageFormat = ['image/jpeg', 'image/jpg', 'image/png'];
 const maxImageSizeInMB = 5;
 
@@ -12,6 +13,27 @@ const authorInput = document.getElementById('author-input');
 const descriptionInput = document.getElementById('description-input');
 const categoryInput = document.getElementById('category-input');
 
+async function onSubmitBookForm(formData) {
+  console.log(formData);
+  const accessToken = localStorage.getItem('access_token');
+  const response = await fetch(`${API_BASE_URL}books/`, {
+    method: 'POST',
+    body: formData,
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      'Content-Type':
+        'multipart/form-data;',
+    },
+  });
+
+  if (response.ok) {
+    window.location.href = '/book-viewer.html';
+  } else {
+    // Server responded with an error
+    console.error('Error sending data to server');
+  }
+}
+
 form.addEventListener('submit', async (event) => {
   event.preventDefault();
 
@@ -19,14 +41,16 @@ form.addEventListener('submit', async (event) => {
     return;
   }
 
+  var input = document.querySelector('input[type="file"]');
+
   const formData = {
     title: titleInput.value.trim(),
     author: authorInput.value.trim(),
     description: descriptionInput.value,
-    category: categoryInput.value.trim(),
+    genres: categoryInput.value.trim(),
+    cover_image: imageInput.files[0],
+    publication_year: year.value,
   };
-
-  // formData.append('image', imageInput.files[0]);
 
   try {
     await onSubmitBookForm(formData);

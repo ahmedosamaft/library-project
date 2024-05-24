@@ -3,21 +3,21 @@ const container = document.getElementById('books-list-container');
 renderBooks();
 
 async function renderBooks() {
-  const books = await fetchBorrowedBooks();
+  const borrowedList = await fetchBorrowedBooks();
 
-  const bookItems = books.map(createBookItem);
+  const bookItems = borrowedList.map(createBookItem);
 
   container.replaceChildren(...bookItems);
 }
 
-function createBookItem(book) {
+function createBookItem(record) {
   const bookItem = document.createElement('tr');
-
+  console.log(record);
   const content = `
-    <td>${book.title}</td>
-    <td>${book.author}</td>
-    <td>${book.borrowDate}</td>
-    <td>${book.returnDate}</td>
+    <td>${record.book.title}</td>
+    <td>${record.book.author}</td>
+    <td>${new Date(record.borrowed_time).toLocaleString()}</td>
+    <td>${new Date(record.due_time).toLocaleString()}</td>
   `;
 
   bookItem.innerHTML = content;

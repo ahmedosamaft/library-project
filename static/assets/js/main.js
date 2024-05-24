@@ -1,4 +1,5 @@
-const API_BASE_URL = 'http://localhost:3000/';
+const BASE_URL = 'http://127.0.0.1:8000';
+const API_BASE_URL = 'http://127.0.0.1:8000/api/';
 
 // Cache the current page and search query to avoid delay in pagination rendering.
 let cachedFetchPageCountTitle = null;
@@ -26,19 +27,26 @@ async function fetchPagesCount({ booksPerPage = 20, title, author, category }) {
 }
 
 async function fetchBorrowedBooks() {
-  // NOTE: a dummy implementation to fetch borrowed books, this should be
-  // implemented in the API.
-  const books = await fetchBooks({ all: true, title: 'The' });
+  const url = new URL('books/borrowed', API_BASE_URL);
 
-  return books.map((book, i) => ({
-    ...book,
-    borrowDate: new Date(
-      Date.now() - (i + 1) * 24 * 3600 * 1000
-    ).toDateString(),
-    returnDate: new Date(
-      Date.now() + (books.length - i) * 24 * 3600 * 1000
-    ).toDateString(),
-  }));
+  const accessToken = localStorage.getItem('access_token');
+  if (!accessToken) {
+    throw new Error('User is not authenticated');
+  }
+
+  const res = await fetch(url, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+
+  if (!res.ok) {
+    throw new Error('Failed to fetch borrowed books');
+  }
+
+  const borrowedBooks = await res.json();
+  return borrowedBooks;
 }
 
 async function fetchBooks({
