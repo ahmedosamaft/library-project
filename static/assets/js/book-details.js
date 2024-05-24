@@ -65,6 +65,16 @@ async function borrowBook(bookId) {
   if (res.ok) {
     location.href = '/borrowed-books.html';
   } else {
-    alert('Failed to borrow book.');
+    try {
+      const data = await res.json();
+
+      if (data.error) {
+        alert(data.error);
+      } else {
+        throw new Error('Unknown error.');
+      }
+    } catch (error) {
+      alert('Failed to borrow book.');
+    }
   }
 }
