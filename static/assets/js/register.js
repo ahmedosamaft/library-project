@@ -47,7 +47,7 @@ form.addEventListener('submit', async (event) => {
     return;
   }
   const name = nameInput.value.trim();
-  const is_staff = isAdminInput;
+  const is_staff = isAdminInput.checked;
   const email = emailInput.value;
   const password = passwordInput.value;
 
