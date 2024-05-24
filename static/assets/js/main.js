@@ -224,6 +224,12 @@ class LibraryState {
   }
 }
 
+function renderGenres(genres) {
+  return genres.length > 0
+    ? genres.map((genre) => genre.name).join(' - ')
+    : 'No Genres';
+}
+
 /**
  * A fetch API wrapper that handles authentication and refreshing the access token
  * with the refresh token if the user is already logged in, if not it skips the authentication.
@@ -237,7 +243,6 @@ async function $fetch(url, options = {}) {
       ...options.headers,
       Authorization: `Bearer ${accessToken}`,
     };
-    console.log(options);
   }
 
   const res = await fetch(url, options);

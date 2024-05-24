@@ -76,11 +76,12 @@ async function renderBooks({ page, title, author, category }) {
 
 function createBookCard(book) {
   const bookCard = document.createElement('article');
+  const genres = renderGenres(book.genres);
   const content = `
     <img src="${BASE_URL + book.cover_image}" alt="${book.title} book cover" />
     <div class="book-info">
       <h4>${book.title}</h4>
-      <p>by <b>${book.author}</b>, in <b>${book.genres[0]}</b></p>
+      <p>by <b>${book.author}</b>, in <b>${genres}</b></p>
 
       <p>${
         book.description.length > 50
