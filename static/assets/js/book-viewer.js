@@ -24,11 +24,11 @@ async function deleteBook(bookId) {
 
 function createBookItem(book) {
   const bookItem = document.createElement('tr');
-  const genreList = renderGenres(book.genres);
+
   const content = `
     <td>${book.title}</td>
     <td>${book.author}</td>
-    <td>${genreList}</td>
+    <td>${book.category}</td>
     <td>${book.description}</td>
     <td>
       <a href="edit-book.html?id=${book.id}" class="edit action-button">Edit</a>

@@ -2,17 +2,11 @@ import datetime
 from django.db import models
 from django.contrib.auth.models import User
 
-
-class Genre(models.Model):
-    name = models.CharField(max_length=100, unique=True)
-    def __str__(self):
-        return self.name
-    
 class Book(models.Model):
     title = models.CharField(max_length=255)
     author = models.CharField(max_length=255)
+    category = models.CharField(max_length=255, default='Unknown')
     publication_year = models.PositiveIntegerField()
-    genres = models.ManyToManyField(Genre)
     description = models.TextField(null=True, blank=True)
     cover_image = models.ImageField(upload_to='book_covers/', blank=True, null=True)
     no_of_copies = models.PositiveIntegerField(default=1)

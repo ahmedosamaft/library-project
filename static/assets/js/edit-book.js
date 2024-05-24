@@ -8,7 +8,7 @@ async function renderEditBookForm(id) {
   titleInput.value = book.title;
   authorInput.value = book.author;
   yearInput.value = book.publication_year;
-  categoryInput.value = book.genres[0].id;
+  categoryInput.value = book.category;
   descriptionInput.value = book.description;
 }
 

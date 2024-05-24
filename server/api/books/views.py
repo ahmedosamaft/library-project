@@ -11,28 +11,25 @@ from users.permissions import IsAdminOrReadonly
 @permission_classes([IsAdminOrReadonly])
 def book_list_create(request):
     if request.method == 'GET':
+        title = request.GET.get('title')
+        author = request.GET.get('author')
+        category = request.GET.get('category')
+
         books = Book.objects.all()
+
+        if title:
+            books = books.filter(title__icontains=title)
+        if author:
+            books = books.filter(author__icontains=author)
+        if category:
+            books = books.filter(category__icontains=category)
         serializer = BookSerializer(books, many=True)
         return Response(serializer.data)
 
     elif request.method == 'POST':
-        print(request.data)
-        genres_string = request.data.pop('genres', None)[0]
-        genres = []
-        if genres_string:
-            genres_ids = [int(genre_id) for genre_id in genres_string.split(' ')]
-            for genre_id in genres_ids:
-                try:
-                    genre = Genre.objects.get(pk=genre_id)
-                    genres.append(genre)
-                except Genre.DoesNotExist:
-                    return Response({'error': f'Genre with ID {genre_id} does not exist'}, status=status.HTTP_400_BAD_REQUEST)
-
         serializer = BookSerializer(data=request.data)
         if serializer.is_valid():
             book = serializer.save()
-            if genres:
-                book.genres.set(genres)
             if 'cover_image' in request.FILES:
                 book.cover_image = request.FILES['cover_image']
                 book.save()

@@ -38,7 +38,7 @@ form.addEventListener('submit', async (event) => {
   formData.append('title', titleInput.value.trim());
   formData.append('author', authorInput.value.trim());
   formData.append('description', descriptionInput.value);
-  formData.append('genres', categoryInput.value.trim());
+  formData.append('category', categoryInput.value.trim());
   formData.append('cover_image', imageInput.files[0]);
   formData.append('publication_year', yearInput.value);
 

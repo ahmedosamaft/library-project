@@ -18,10 +18,6 @@ const bookId = LibraryState.I.state.id;
 renderBookDetails(bookId);
 
 function createBookDetailsContent(book) {
-  const genreList =
-    book.genres.length > 0
-      ? book.genres.map((genre) => genre.name).join(' - ')
-      : 'No Genres';
   const content = `
     <div>
       <div>
@@ -37,7 +33,7 @@ function createBookDetailsContent(book) {
         </tr>
         <tr>
           <th>Category</th>
-          <td>${genreList}</td>
+          <td>${book.category}</td>
         </tr>
         <tr>
           <th>Availability</th>
