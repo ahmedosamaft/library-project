@@ -14,15 +14,11 @@ const descriptionInput = document.getElementById('description-input');
 const categoryInput = document.getElementById('category-input');
 
 async function onSubmitBookForm(formData) {
-  console.log(formData);
-  const accessToken = localStorage.getItem('access_token');
-  const response = await fetch(`${API_BASE_URL}books/`, {
+  const response = await $fetch(`${API_BASE_URL}books/`, {
     method: 'POST',
     body: formData,
     headers: {
-      Authorization: `Bearer ${accessToken}`,
-      'Content-Type':
-        'multipart/form-data;',
+      'Content-Type': 'multipart/form-data;',
     },
   });
 

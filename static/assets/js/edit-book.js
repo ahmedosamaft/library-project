@@ -12,7 +12,7 @@ async function renderEditBookForm(id) {
 }
 
 async function onSubmitBookForm(formData) {
-  const response = await fetch(`${API_BASE_URL}books/${bookId}`, {
+  const response = await $fetch(`${API_BASE_URL}books/${bookId}`, {
     method: 'PATCH',
     body: JSON.stringify(formData),
     headers: {

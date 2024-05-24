@@ -34,12 +34,7 @@ async function fetchBorrowedBooks() {
     throw new Error('User is not authenticated');
   }
 
-  const res = await fetch(url, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
+  const res = await $fetch(url);
 
   if (!res.ok) {
     throw new Error('Failed to fetch borrowed books');
@@ -84,7 +79,7 @@ async function fetchBooks({
     url.searchParams.append('category', category);
   }
 
-  const res = await fetch(url);
+  const res = await $fetch(url);
   const books = await res.json();
 
   return books;
@@ -93,7 +88,7 @@ async function fetchBooks({
 async function fetchBookById(id) {
   const url = new URL(`books/${id}`, API_BASE_URL);
 
-  const res = await fetch(url);
+  const res = await $fetch(url);
   const book = await res.json();
 
   return book;
@@ -102,7 +97,7 @@ async function fetchBookById(id) {
 async function login({ email, password }) {
   const url = new URL('login', API_BASE_URL);
 
-  const res = await fetch(url, {
+  const res = await $fetch(url, {
     method: 'POST',
     body: JSON.stringify({ email, password }),
     headers: {
@@ -122,7 +117,7 @@ async function login({ email, password }) {
 async function register({ name, email, password, isAdmin }) {
   const url = new URL('register', API_BASE_URL);
 
-  const res = await fetch(url, {
+  const res = await $fetch(url, {
     method: 'POST',
     body: JSON.stringify({ name, email, password, isAdmin }),
     headers: {
@@ -227,4 +222,46 @@ class LibraryState {
       (item) => item !== listener
     );
   }
+}
+
+/**
+ * A fetch API wrapper that handles authentication and refreshing the access token
+ * with the refresh token if the user is already logged in, if not it skips the authentication.
+ */
+async function $fetch(url, options = {}) {
+  const accessToken = localStorage.getItem('access_token');
+  const refreshToken = localStorage.getItem('refresh_token');
+
+  if (accessToken) {
+    options.headers = {
+      ...options.headers,
+      Authorization: `Bearer ${accessToken}`,
+    };
+    console.log(options);
+  }
+
+  const res = await fetch(url, options);
+
+  if (res.status === 401 && refreshToken) {
+    const refreshRes = await fetch(`${API_BASE_URL}users/token/refresh/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ refresh: refreshToken }),
+    });
+
+    if (refreshRes.ok) {
+      const data = await refreshRes.json();
+
+      localStorage.setItem('access_token', data.access);
+
+      return $fetch(url, options);
+    } else {
+      localStorage.removeItem('access_token');
+      localStorage.removeItem('refresh_token');
+    }
+  }
+
+  return res;
 }
