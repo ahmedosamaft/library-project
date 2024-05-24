@@ -10,6 +10,18 @@ async function renderBooks() {
   container.replaceChildren(...bookItems);
 }
 
+async function deleteBook(bookId) {
+  const res = await $fetch(`${API_BASE_URL}books/${bookId}`, {
+    method: 'DELETE',
+  });
+
+  if (res.ok) {
+    renderBooks();
+  } else {
+    alert('Failed to delete book.');
+  }
+}
+
 function createBookItem(book) {
   const bookItem = document.createElement('tr');
   const genreList = renderGenres(book.genres);
@@ -22,10 +34,7 @@ function createBookItem(book) {
       <a href="edit-book.html?id=${book.id}" class="edit action-button">Edit</a>
     </td>
     <td>
-      <form method="GET" action="${API_BASE_URL}books/${book.id}">
-        <input type="hidden" name="id" value="${book.id}">
-        <button type="submit" class="delete">Delete</button>
-      </form>
+      <button class="delete" onclick="deleteBook(${book.id})">Delete</button>
     </td>
   `;
 

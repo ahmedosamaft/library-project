@@ -248,7 +248,7 @@ async function $fetch(url, options = {}) {
   const res = await fetch(url, options);
 
   if (res.status === 401 && refreshToken) {
-    const refreshRes = await fetch(`${API_BASE_URL}users/token/refresh/`, {
+    const refreshResponse = await fetch(`${API_BASE_URL}users/token/refresh/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -256,13 +256,18 @@ async function $fetch(url, options = {}) {
       body: JSON.stringify({ refresh: refreshToken }),
     });
 
-    if (refreshRes.ok) {
-      const data = await refreshRes.json();
+    if (refreshResponse.ok) {
+      const data = await refreshResponse.json();
 
       localStorage.setItem('access_token', data.access);
 
       return $fetch(url, options);
-    } else {
+    } else if (
+      refreshResponse.status === 401 ||
+      // Django returns a 500 internal error status code when a user doesn't exist in the database
+      // so we assume that all 500 status codes are due to the user not existing in the database.
+      refreshResponse.status === 500
+    ) {
       localStorage.removeItem('access_token');
       localStorage.removeItem('refresh_token');
     }
