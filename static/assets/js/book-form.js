@@ -4,7 +4,7 @@ const form = document.getElementById('book-form');
 const imageInput = document.getElementById('book-cover-input');
 const imageElement = document.getElementById('book-cover-input_image');
 const coverContainer = document.getElementById('book-cover-input-container');
-const year = document.getElementById('year-input');
+const yearInput = document.getElementById('year-input');
 const allowedImageFormat = ['image/jpeg', 'image/jpg', 'image/png'];
 const maxImageSizeInMB = 5;
 
@@ -17,9 +17,6 @@ async function onSubmitBookForm(formData) {
   const response = await $fetch(`${API_BASE_URL}books/`, {
     method: 'POST',
     body: formData,
-    headers: {
-      'Content-Type': 'multipart/form-data;',
-    },
   });
 
   if (response.ok) {
@@ -37,16 +34,13 @@ form.addEventListener('submit', async (event) => {
     return;
   }
 
-  var input = document.querySelector('input[type="file"]');
-
-  const formData = {
-    title: titleInput.value.trim(),
-    author: authorInput.value.trim(),
-    description: descriptionInput.value,
-    genres: categoryInput.value.trim(),
-    cover_image: imageInput.files[0],
-    publication_year: year.value,
-  };
+  const formData = new FormData();
+  formData.append('title', titleInput.value.trim());
+  formData.append('author', authorInput.value.trim());
+  formData.append('description', descriptionInput.value);
+  formData.append('genres', categoryInput.value.trim());
+  formData.append('cover_image', imageInput.files[0]);
+  formData.append('publication_year', yearInput.value);
 
   try {
     await onSubmitBookForm(formData);

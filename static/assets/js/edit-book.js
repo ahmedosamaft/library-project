@@ -7,21 +7,19 @@ async function renderEditBookForm(id) {
 
   titleInput.value = book.title;
   authorInput.value = book.author;
-  categoryInput.value = book.genre[0];
+  yearInput.value = book.publication_year;
+  categoryInput.value = book.genres[0].id;
   descriptionInput.value = book.description;
 }
 
 async function onSubmitBookForm(formData) {
-  const response = await $fetch(`${API_BASE_URL}books/${bookId}`, {
-    method: 'PATCH',
-    body: JSON.stringify(formData),
-    headers: {
-      'Content-Type': 'application/json',
-    },
+  const response = await $fetch(`${API_BASE_URL}books/${bookId}/`, {
+    method: 'PUT',
+    body: formData,
   });
 
   if (response.ok) {
-    window.location.href = BASE_URL + 'book-viewer.html';
+    window.location.href = '/book-viewer.html';
   } else {
     // Server responded with an error
     console.error('Error sending data to server');
