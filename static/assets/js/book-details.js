@@ -37,8 +37,7 @@ function createBookDetailsContent(book) {
         </tr>
         <tr>
           <th>Availability</th>
-          <!-- Hard-coded until we implement it in our API. -->
-          <td>Available</td>
+          <td>${book.no_of_copies > 0 ? 'Available' : 'Not Available'}</td>
         </tr>
       </table>
 
@@ -59,7 +58,7 @@ async function borrowBook(bookId) {
   });
 
   if (res.ok) {
-    location.href = '/borrowed-books.html';
+    location.href = 'borrowed-books.html';
   } else {
     try {
       const data = await res.json();
